@@ -1,11 +1,37 @@
-name: blank
+# This is a basic workflow to help you get started with Actions
+
+name: AA docker test containers
+
+# Controls when the workflow will run
 on:
-  push:
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  blank:
-    runs-on: ubuntu-latest
+  # This workflow contains a single job called "build"
+  test-running-containers:
+    # The type of runner that the job will run on
+    runs-on: [self-hosted]
+    container:
+        image: docker://alpine
+        #image: sanofi-docker-atmos-local.jfrog.io/furno_devops_v02:latest
+        #credentials:
+          #username: ${{ secrets.ARTIFACTORY_USER }}
+          #password: ${{ secrets.ARTIFACTORY_TOKEN }}
+
+ #   env:
+ #       HTTP_PROXY: 'emea-aws-webproxy.service.cloud.local:3128'
+ #       HTTPS_PROXY: 'emea-aws-webproxy.service.cloud.local:3128'
+ #       NO_PROXY: '*.cloud.local,sanofi.com,docker,169.254.169.254'
+ #       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      - name: MyCommands
-        run: |
-          echo Hello
-          echo World
+        
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+
+
+
+          
